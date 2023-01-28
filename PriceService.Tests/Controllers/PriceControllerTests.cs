@@ -52,7 +52,7 @@ public class Tests
     {
         A.CallTo(() => _bookingService.IsCarAvailable(Guid.Empty, DateTime.Now, DateTime.Now))
             .WithAnyArguments()
-            .Returns(true);
+            .Returns(false);
         var result = await _priceController
             .Get(new Guid("9D2B0228-4D0D-4C23-8B49-01A698837709"), 
                 DateTime.Parse(datetimeSaterday), 
@@ -65,7 +65,7 @@ public class Tests
     {
         A.CallTo(() => _bookingService.IsCarAvailable(Guid.Empty, DateTime.Now, DateTime.Now))
             .WithAnyArguments()
-            .Returns(true);
+            .Returns(false);
         var result = await _priceController
             .Get(new Guid("9D2B0228-4D0D-4C23-8B49-01A698857709"), 
                 DateTime.Parse(datetimeSaterday), 
@@ -78,7 +78,7 @@ public class Tests
     {
         A.CallTo(() => _bookingService.IsCarAvailable(Guid.Empty, DateTime.Now, DateTime.Now))
             .WithAnyArguments()
-            .Returns(false);
+            .Returns(true);
         var result = await _priceController
             .Get(new Guid("9D2B0228-4D0D-4C23-8B49-01A698857709"), 
                 DateTime.Parse(datetimeSaterday), 
@@ -93,7 +93,7 @@ public class Tests
     {
         A.CallTo(() => _bookingService.IsCarAvailable(Guid.Empty, DateTime.Now, DateTime.Now))
             .WithAnyArguments()
-            .Returns(false);
+            .Returns(true);
         var result = await _priceController
             .Get(new Guid("9D2B0228-4D0D-4C23-8B49-01A698857709"), 
                 DateTime.Parse(datetimeSaterday), 
@@ -108,7 +108,7 @@ public class Tests
     {
         A.CallTo(() => _bookingService.IsCarAvailable(Guid.Empty, DateTime.Now, DateTime.Now))
             .WithAnyArguments()
-            .Returns(false);
+            .Returns(true);
         var result = await _priceController
             .Get(new Guid("9D2B0228-4D0D-4C23-8B49-01A698857709"), 
                 DateTime.Parse(datetimeFriday), 
@@ -123,7 +123,7 @@ public class Tests
     {
         A.CallTo(() => _bookingService.IsCarAvailable(Guid.Empty, DateTime.Now, DateTime.Now))
             .WithAnyArguments()
-            .Returns(false);
+            .Returns(true);
         var result = await _priceController
             .Get(new Guid("9D2B0228-4D0D-4C23-8B49-01A698857709"), 
                 DateTime.Parse(datetimeTuesday), 

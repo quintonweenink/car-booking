@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace PricingService.Database;
+namespace PriceService.Database;
 
 public class PriceContext : DbContext
 {

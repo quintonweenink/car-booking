@@ -1,32 +1,44 @@
-using CarBooking.Controllers;
 using Microsoft.EntityFrameworkCore;
-using PricingService.Database;
+using PriceService.Database;
 
-namespace CarBooking;
+namespace PriceService.Services;
 
-public class PriceService
+public class PriceService : IPriceService
 {
     private readonly ILogger<PriceService> _logger;
     private readonly PriceContext _priceContext;
+    private readonly IBookingService _bookingService;
 
-    public PriceService(ILogger<PriceService> logger, PriceContext priceContext)
+    public PriceService(ILogger<PriceService> logger, PriceContext priceContext, IBookingService bookingService)
     {
         _logger = logger;
         _priceContext = priceContext;
+        _bookingService = bookingService;
     }
 
-    public async Task<CarPriceResponse> GetPrice(Guid carId, DateTime startTime, DateTime endTime)
+    public async Task<Controllers.CarPriceResponse> GetPrice(Guid carId, DateTime startTime, DateTime endTime)
     {
-        var carPrice = await _priceContext.Cars.FirstOrDefaultAsync(car => car.CarId.Equals(carId));
-
-        return new CarPriceResponse()
+        if(!await _bookingService.IsCarAvailable(carId, startTime, endTime))
         {
-            FullPrice = GetPrice(carPrice.Price, startTime, endTime),
+            _logger.LogError($"Car with identifier {carId.ToString()} has already been booked for this time");
+            throw new Exception($"Car with identifier {carId.ToString()} has already been booked for this time"); 
+        }
+        
+        var carPrice = await _priceContext.Cars.FirstOrDefaultAsync(car => car.CarId.Equals(carId));
+        if (carPrice == null)
+        {
+            _logger.LogError($"Car with identifier {carId.ToString()} not found");
+            throw new Exception($"Car with identifier {carId.ToString()} not found");
+        }
+
+        return new Controllers.CarPriceResponse()
+        {
+            FullPrice = CalculatePrice(carPrice.Price, startTime, endTime),
             CarId = carPrice.CarId
         };
     }
     
-    private static decimal GetPrice(decimal price, DateTime startTime, DateTime endTime)
+    private static decimal CalculatePrice(decimal price, DateTime startTime, DateTime endTime)
     {
         decimal totalPrice = 0;
         int days = 0;

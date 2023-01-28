@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PriceService.Tests", "Price
 		{6E941078-74CE-4EBE-A45A-B05529D554BE} = {6E941078-74CE-4EBE-A45A-B05529D554BE}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookingService", "BookingService\BookingService.csproj", "{BAA159EA-9CBC-496F-9165-CF823D91B3AB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookingService.Tests", "BookingService.Tests\BookingService.Tests.csproj", "{96EEC8AB-0601-4CCF-904E-09D1E1897390}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,5 +25,13 @@ Global
 		{EB225750-D229-45C7-B52E-F5BB85BA68A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB225750-D229-45C7-B52E-F5BB85BA68A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EB225750-D229-45C7-B52E-F5BB85BA68A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BAA159EA-9CBC-496F-9165-CF823D91B3AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BAA159EA-9CBC-496F-9165-CF823D91B3AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BAA159EA-9CBC-496F-9165-CF823D91B3AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BAA159EA-9CBC-496F-9165-CF823D91B3AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96EEC8AB-0601-4CCF-904E-09D1E1897390}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96EEC8AB-0601-4CCF-904E-09D1E1897390}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96EEC8AB-0601-4CCF-904E-09D1E1897390}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96EEC8AB-0601-4CCF-904E-09D1E1897390}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

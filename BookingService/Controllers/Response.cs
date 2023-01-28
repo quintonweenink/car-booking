@@ -1,4 +1,4 @@
-namespace PriceService.Controllers;
+namespace BookingService.Controllers;
 
 public class Response
 {

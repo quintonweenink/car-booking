@@ -1,5 +1,5 @@
-using CarBooking;
-using PricingService.Database;
+using PriceService.Database;
+using PriceService.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,7 +11,8 @@ builder.Services.AddDbContext<PriceContext>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<PriceService>();
+builder.Services.AddScoped<IPriceService, PriceService.Services.PriceService>();
+builder.Services.AddScoped<IBookingService, BookingService>();
 
 var app = builder.Build();
 

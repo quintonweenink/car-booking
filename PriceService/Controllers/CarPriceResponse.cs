@@ -1,4 +1,4 @@
-namespace CarBooking.Controllers;
+namespace PriceService.Controllers;
 
 public class CarPriceResponse
 {

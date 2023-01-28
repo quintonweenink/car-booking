@@ -1,15 +1,18 @@
-using CarBooking.Controllers;
-using Microsoft.Extensions.Logging;
-using PricingService.Database;
 using FakeItEasy;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using PriceService.Controllers;
+using PriceService.Database;
+using PriceService.Services;
 
-namespace PriceService.Tests;
+namespace PriceService.Tests.Controllers;
 
 public class Tests
 {
+    private Services.PriceService _priceService;
     private PriceController _priceController;
     private PriceContext dbContext;
+    private IBookingService _bookingService;
 
     private const string datetimeTuesday = "2030-01-01T12:16:22.697099+02:00";
     private const string datetimeFriday = "2030-01-04T12:16:22.697099+02:00";
@@ -35,18 +38,36 @@ public class Tests
                 CarId = new Guid("9D2B0228-4D0D-4C23-8B49-01A698857709"),
                 Price = 100
             });
+
+            dbContext.SaveChanges();
         }
 
-        var logger = A.Fake<ILogger<PriceController>>();
-
-        _priceController = new PriceController(logger, dbContext);
+        _bookingService = A.Fake<IBookingService>();
+        _priceService = new Services.PriceService(A.Fake<ILogger<Services.PriceService>>(), dbContext, _bookingService);
+        _priceController = new PriceController(A.Fake<ILogger<PriceController>>(), _priceService);
     }
     
     [Test]
     public async Task TestCarDoesNotExist()
     {
+        A.CallTo(() => _bookingService.IsCarBooked(Guid.Empty, DateTime.Now, DateTime.Now))
+            .WithAnyArguments()
+            .Returns(true);
         var result = await _priceController
             .Get(new Guid("9D2B0228-4D0D-4C23-8B49-01A698837709"), 
+                DateTime.Parse(datetimeSaterday), 
+                DateTime.Parse(datetimeSunday));
+        Assert.That(result.Success, Is.EqualTo(false));
+    }
+    
+    [Test]
+    public async Task CarIsAlreadyBooked()
+    {
+        A.CallTo(() => _bookingService.IsCarBooked(Guid.Empty, DateTime.Now, DateTime.Now))
+            .WithAnyArguments()
+            .Returns(true);
+        var result = await _priceController
+            .Get(new Guid("9D2B0228-4D0D-4C23-8B49-01A698857709"), 
                 DateTime.Parse(datetimeSaterday), 
                 DateTime.Parse(datetimeSunday));
         Assert.That(result.Success, Is.EqualTo(false));
@@ -55,6 +76,9 @@ public class Tests
     [Test]
     public async Task WeekendTwoDayRental()
     {
+        A.CallTo(() => _bookingService.IsCarBooked(Guid.Empty, DateTime.Now, DateTime.Now))
+            .WithAnyArguments()
+            .Returns(false);
         var result = await _priceController
             .Get(new Guid("9D2B0228-4D0D-4C23-8B49-01A698857709"), 
                 DateTime.Parse(datetimeSaterday), 
@@ -67,6 +91,9 @@ public class Tests
     [Test]
     public async Task WeekendOneDayRental()
     {
+        A.CallTo(() => _bookingService.IsCarBooked(Guid.Empty, DateTime.Now, DateTime.Now))
+            .WithAnyArguments()
+            .Returns(false);
         var result = await _priceController
             .Get(new Guid("9D2B0228-4D0D-4C23-8B49-01A698857709"), 
                 DateTime.Parse(datetimeSaterday), 
@@ -79,6 +106,9 @@ public class Tests
     [Test]
     public async Task WeekdayDayRental()
     {
+        A.CallTo(() => _bookingService.IsCarBooked(Guid.Empty, DateTime.Now, DateTime.Now))
+            .WithAnyArguments()
+            .Returns(false);
         var result = await _priceController
             .Get(new Guid("9D2B0228-4D0D-4C23-8B49-01A698857709"), 
                 DateTime.Parse(datetimeFriday), 
@@ -91,6 +121,9 @@ public class Tests
     [Test]
     public async Task WeekdayDayFourDayRental()
     {
+        A.CallTo(() => _bookingService.IsCarBooked(Guid.Empty, DateTime.Now, DateTime.Now))
+            .WithAnyArguments()
+            .Returns(false);
         var result = await _priceController
             .Get(new Guid("9D2B0228-4D0D-4C23-8B49-01A698857709"), 
                 DateTime.Parse(datetimeTuesday), 

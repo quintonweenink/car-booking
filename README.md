@@ -18,3 +18,6 @@ A Rental price consists of:
 The most basic and important initial feature is for the pricing service is for it to return the price of the car based on a start and end date.
 Without this we can't have bookings. Lets build and test this first
 
+Took me a while to get the in memory db working.
+
+Going to stop development with the above. Just want to document the work that has been done.

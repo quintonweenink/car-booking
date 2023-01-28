@@ -1,6 +1,16 @@
 # car-booking
 Car booking system
 
+## How to run the project
+
+### Run booking service
+`cd BookingService`
+`dotnet run`
+
+### Run price service
+`cd PriceService`
+`dotnet run`
+
 ## Assumptions
 A Rental price consists of:
 * A price per car, per day
@@ -25,4 +35,6 @@ Going to stop development with the above. Just want to document the work that ha
 ### Work actions
 
 - Queing
-- 
+- PriceService Docker file broken
+- Allow user to book a car
+- Authentication

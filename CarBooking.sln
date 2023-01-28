@@ -1,6 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarBooking", "CarBooking\CarBooking.csproj", "{6E941078-74CE-4EBE-A45A-B05529D554BE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PriceService", "PriceService\PriceService.csproj", "{6E941078-74CE-4EBE-A45A-B05529D554BE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PriceService.Tests", "PriceService.Tests\PriceService.Tests.csproj", "{EB225750-D229-45C7-B52E-F5BB85BA68A6}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6E941078-74CE-4EBE-A45A-B05529D554BE} = {6E941078-74CE-4EBE-A45A-B05529D554BE}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -12,5 +17,9 @@ Global
 		{6E941078-74CE-4EBE-A45A-B05529D554BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6E941078-74CE-4EBE-A45A-B05529D554BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6E941078-74CE-4EBE-A45A-B05529D554BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB225750-D229-45C7-B52E-F5BB85BA68A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB225750-D229-45C7-B52E-F5BB85BA68A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB225750-D229-45C7-B52E-F5BB85BA68A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB225750-D229-45C7-B52E-F5BB85BA68A6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

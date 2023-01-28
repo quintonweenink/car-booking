@@ -50,7 +50,7 @@ public class Tests
     [Test]
     public async Task TestCarDoesNotExist()
     {
-        A.CallTo(() => _bookingService.IsCarBooked(Guid.Empty, DateTime.Now, DateTime.Now))
+        A.CallTo(() => _bookingService.IsCarAvailable(Guid.Empty, DateTime.Now, DateTime.Now))
             .WithAnyArguments()
             .Returns(true);
         var result = await _priceController
@@ -63,7 +63,7 @@ public class Tests
     [Test]
     public async Task CarIsAlreadyBooked()
     {
-        A.CallTo(() => _bookingService.IsCarBooked(Guid.Empty, DateTime.Now, DateTime.Now))
+        A.CallTo(() => _bookingService.IsCarAvailable(Guid.Empty, DateTime.Now, DateTime.Now))
             .WithAnyArguments()
             .Returns(true);
         var result = await _priceController
@@ -76,7 +76,7 @@ public class Tests
     [Test]
     public async Task WeekendTwoDayRental()
     {
-        A.CallTo(() => _bookingService.IsCarBooked(Guid.Empty, DateTime.Now, DateTime.Now))
+        A.CallTo(() => _bookingService.IsCarAvailable(Guid.Empty, DateTime.Now, DateTime.Now))
             .WithAnyArguments()
             .Returns(false);
         var result = await _priceController
@@ -91,7 +91,7 @@ public class Tests
     [Test]
     public async Task WeekendOneDayRental()
     {
-        A.CallTo(() => _bookingService.IsCarBooked(Guid.Empty, DateTime.Now, DateTime.Now))
+        A.CallTo(() => _bookingService.IsCarAvailable(Guid.Empty, DateTime.Now, DateTime.Now))
             .WithAnyArguments()
             .Returns(false);
         var result = await _priceController
@@ -106,7 +106,7 @@ public class Tests
     [Test]
     public async Task WeekdayDayRental()
     {
-        A.CallTo(() => _bookingService.IsCarBooked(Guid.Empty, DateTime.Now, DateTime.Now))
+        A.CallTo(() => _bookingService.IsCarAvailable(Guid.Empty, DateTime.Now, DateTime.Now))
             .WithAnyArguments()
             .Returns(false);
         var result = await _priceController
@@ -121,7 +121,7 @@ public class Tests
     [Test]
     public async Task WeekdayDayFourDayRental()
     {
-        A.CallTo(() => _bookingService.IsCarBooked(Guid.Empty, DateTime.Now, DateTime.Now))
+        A.CallTo(() => _bookingService.IsCarAvailable(Guid.Empty, DateTime.Now, DateTime.Now))
             .WithAnyArguments()
             .Returns(false);
         var result = await _priceController
